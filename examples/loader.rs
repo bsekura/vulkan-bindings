@@ -1,6 +1,5 @@
 #![allow(dead_code)]
 #![allow(non_snake_case)]
-#![feature(trace_macros)]
 
 use vulkan_bindings as vk;
 
