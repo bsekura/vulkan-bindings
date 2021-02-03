@@ -2091,6 +2091,7 @@ pub const STRUCTURE_TYPE_PRIVATE_DATA_SLOT_CREATE_INFO_EXT: i32 = 1000295002;
 pub const STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_CREATION_CACHE_CONTROL_FEATURES_EXT: i32 = 1000297000;
 pub const STRUCTURE_TYPE_PHYSICAL_DEVICE_DIAGNOSTICS_CONFIG_FEATURES_NV: i32 = 1000300000;
 pub const STRUCTURE_TYPE_DEVICE_DIAGNOSTICS_CONFIG_CREATE_INFO_NV: i32 = 1000300001;
+pub const STRUCTURE_TYPE_PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES_KHR: i32 = 1000325000;
 pub const STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_ENUMS_PROPERTIES_NV: i32 = 1000326000;
 pub const STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_ENUMS_FEATURES_NV: i32 = 1000326001;
 pub const STRUCTURE_TYPE_PIPELINE_FRAGMENT_SHADING_RATE_ENUM_STATE_CREATE_INFO_NV: i32 = 1000326002;
@@ -2098,6 +2099,7 @@ pub const STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_FEATURES_EXT: i3
 pub const STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_PROPERTIES_EXT: i32 = 1000332001;
 pub const STRUCTURE_TYPE_COPY_COMMAND_TRANSFORM_INFO_QCOM: i32 = 1000333000;
 pub const STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_ROBUSTNESS_FEATURES_EXT: i32 = 1000335000;
+pub const STRUCTURE_TYPE_PHYSICAL_DEVICE_WORKGROUP_MEMORY_EXPLICIT_LAYOUT_FEATURES_KHR: i32 = 1000336000;
 pub const STRUCTURE_TYPE_COPY_BUFFER_INFO_2_KHR: i32 = 1000337000;
 pub const STRUCTURE_TYPE_COPY_IMAGE_INFO_2_KHR: i32 = 1000337001;
 pub const STRUCTURE_TYPE_COPY_BUFFER_TO_IMAGE_INFO_2_KHR: i32 = 1000337002;
@@ -8407,6 +8409,14 @@ pub struct DeviceDiagnosticsConfigCreateInfoNV {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
+pub struct PhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR {
+    pub sType: StructureType,
+    pub pNext: *mut c_void,
+    pub shaderZeroInitializeWorkgroupMemory: Bool32,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
 pub struct PhysicalDeviceRobustness2FeaturesEXT {
     pub sType: StructureType,
     pub pNext: *mut c_void,
@@ -8430,6 +8440,17 @@ pub struct PhysicalDeviceImageRobustnessFeaturesEXT {
     pub sType: StructureType,
     pub pNext: *mut c_void,
     pub robustImageAccess: Bool32,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct PhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR {
+    pub sType: StructureType,
+    pub pNext: *mut c_void,
+    pub workgroupMemoryExplicitLayout: Bool32,
+    pub workgroupMemoryExplicitLayoutScalarBlockLayout: Bool32,
+    pub workgroupMemoryExplicitLayout8BitAccess: Bool32,
+    pub workgroupMemoryExplicitLayout16BitAccess: Bool32,
 }
 
 #[repr(C)]
