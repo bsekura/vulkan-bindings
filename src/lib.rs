@@ -35,9 +35,9 @@ pub const ATTACHMENT_UNUSED: u32 = !0u32;
 pub const TRUE: u32 = 1;
 pub const FALSE: u32 = 0;
 pub const QUEUE_FAMILY_IGNORED: u32 = !0u32;
-pub const QUEUE_FAMILY_EXTERNAL: u32 = !0u32-1;
+pub const QUEUE_FAMILY_EXTERNAL: u32 = !1u32;
 pub const QUEUE_FAMILY_EXTERNAL_KHR: u32 = QUEUE_FAMILY_EXTERNAL;
-pub const QUEUE_FAMILY_FOREIGN_EXT: u32 = !0u32-2;
+pub const QUEUE_FAMILY_FOREIGN_EXT: u32 = !2u32;
 pub const SUBPASS_EXTERNAL: u32 = !0u32;
 pub const MAX_DEVICE_GROUP_SIZE: u32 = 32;
 pub const MAX_DEVICE_GROUP_SIZE_KHR: u32 = MAX_DEVICE_GROUP_SIZE;
@@ -57,6 +57,7 @@ pub const NULL_HANDLE: u64 = 0;
 pub type SampleMask = u32;
 pub type Bool32 = u32;
 pub type Flags = u32;
+pub type Flags64 = u64;
 pub type DeviceSize = u64;
 pub type DeviceAddress = u64;
 
@@ -104,6 +105,8 @@ pub type SurfaceKHR = u64;
 pub type SwapchainKHR = u64;
 pub type DebugReportCallbackEXT = u64;
 pub type DebugUtilsMessengerEXT = u64;
+pub type VideoSessionKHR = u64;
+pub type VideoSessionParametersKHR = u64;
 
 // bitmasks
 
@@ -176,6 +179,8 @@ pub const QUEUE_COMPUTE_BIT: u32 = 2; // Queue supports compute operations
 pub const QUEUE_TRANSFER_BIT: u32 = 4; // Queue supports transfer operations
 pub const QUEUE_SPARSE_BINDING_BIT: u32 = 8; // Queue supports sparse resource memory management operations
 pub const QUEUE_PROTECTED_BIT: u32 = 16; // Queues may support protected operations
+pub const QUEUE_VIDEO_DECODE_BIT_KHR: u32 = 32;
+pub const QUEUE_VIDEO_ENCODE_BIT_KHR: u32 = 64;
 
 pub type MemoryPropertyFlags = Flags;
 pub type MemoryPropertyFlagBits = u32;
@@ -227,6 +232,7 @@ pub const ACCESS_FRAGMENT_DENSITY_MAP_READ_BIT_EXT: u32 = 16777216;
 pub const ACCESS_FRAGMENT_SHADING_RATE_ATTACHMENT_READ_BIT_KHR: u32 = ACCESS_SHADING_RATE_IMAGE_READ_BIT_NV;
 pub const ACCESS_COMMAND_PREPROCESS_READ_BIT_NV: u32 = 131072;
 pub const ACCESS_COMMAND_PREPROCESS_WRITE_BIT_NV: u32 = 262144;
+pub const ACCESS_NONE_KHR: u32 = 0;
 
 pub type BufferUsageFlags = Flags;
 pub type BufferUsageFlagBits = u32;
@@ -240,6 +246,10 @@ pub const BUFFER_USAGE_INDEX_BUFFER_BIT: u32 = 64; // Can be used as source of f
 pub const BUFFER_USAGE_VERTEX_BUFFER_BIT: u32 = 128; // Can be used as source of fixed-function vertex fetch (VBO)
 pub const BUFFER_USAGE_INDIRECT_BUFFER_BIT: u32 = 256; // Can be the source of indirect parameters (e.g. indirect buffer, parameter buffer)
 pub const BUFFER_USAGE_SHADER_DEVICE_ADDRESS_BIT: u32 = 131072;
+pub const BUFFER_USAGE_VIDEO_DECODE_SRC_BIT_KHR: u32 = 8192;
+pub const BUFFER_USAGE_VIDEO_DECODE_DST_BIT_KHR: u32 = 16384;
+pub const BUFFER_USAGE_VIDEO_ENCODE_DST_BIT_KHR: u32 = 32768;
+pub const BUFFER_USAGE_VIDEO_ENCODE_SRC_BIT_KHR: u32 = 65536;
 pub const BUFFER_USAGE_TRANSFORM_FEEDBACK_BUFFER_BIT_EXT: u32 = 2048;
 pub const BUFFER_USAGE_TRANSFORM_FEEDBACK_COUNTER_BUFFER_BIT_EXT: u32 = 4096;
 pub const BUFFER_USAGE_CONDITIONAL_RENDERING_BIT_EXT: u32 = 512; // Specifies the buffer can be used as predicate in conditional rendering
@@ -254,7 +264,7 @@ pub type BufferCreateFlags = Flags;
 pub type BufferCreateFlagBits = u32;
 pub const BUFFER_CREATE_SPARSE_BINDING_BIT: u32 = 1; // Buffer should support sparse backing
 pub const BUFFER_CREATE_SPARSE_RESIDENCY_BIT: u32 = 2; // Buffer should support sparse backing with partial residency
-pub const BUFFER_CREATE_SPARSE_ALIASED_BIT: u32 = 4; // Buffer should support constent data access to physical memory ranges mapped into multiple locations of sparse buffers
+pub const BUFFER_CREATE_SPARSE_ALIASED_BIT: u32 = 4; // Buffer should support constant data access to physical memory ranges mapped into multiple locations of sparse buffers
 pub const BUFFER_CREATE_PROTECTED_BIT: u32 = 8; // Buffer requires protected memory
 pub const BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT: u32 = 16;
 pub const BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_EXT: u32 = BUFFER_CREATE_DEVICE_ADDRESS_CAPTURE_REPLAY_BIT;
@@ -295,6 +305,12 @@ pub const IMAGE_USAGE_COLOR_ATTACHMENT_BIT: u32 = 16; // Can be used as framebuf
 pub const IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT: u32 = 32; // Can be used as framebuffer depth/stencil attachment
 pub const IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT: u32 = 64; // Image data not needed outside of rendering
 pub const IMAGE_USAGE_INPUT_ATTACHMENT_BIT: u32 = 128; // Can be used as framebuffer input attachment
+pub const IMAGE_USAGE_VIDEO_DECODE_DST_BIT_KHR: u32 = 1024;
+pub const IMAGE_USAGE_VIDEO_DECODE_SRC_BIT_KHR: u32 = 2048;
+pub const IMAGE_USAGE_VIDEO_DECODE_DPB_BIT_KHR: u32 = 4096;
+pub const IMAGE_USAGE_VIDEO_ENCODE_DST_BIT_KHR: u32 = 8192;
+pub const IMAGE_USAGE_VIDEO_ENCODE_SRC_BIT_KHR: u32 = 16384;
+pub const IMAGE_USAGE_VIDEO_ENCODE_DPB_BIT_KHR: u32 = 32768;
 pub const IMAGE_USAGE_SHADING_RATE_IMAGE_BIT_NV: u32 = 256;
 pub const IMAGE_USAGE_FRAGMENT_DENSITY_MAP_BIT_EXT: u32 = 512;
 pub const IMAGE_USAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR: u32 = IMAGE_USAGE_SHADING_RATE_IMAGE_BIT_NV;
@@ -303,7 +319,7 @@ pub type ImageCreateFlags = Flags;
 pub type ImageCreateFlagBits = u32;
 pub const IMAGE_CREATE_SPARSE_BINDING_BIT: u32 = 1; // Image should support sparse backing
 pub const IMAGE_CREATE_SPARSE_RESIDENCY_BIT: u32 = 2; // Image should support sparse backing with partial residency
-pub const IMAGE_CREATE_SPARSE_ALIASED_BIT: u32 = 4; // Image should support constent data access to physical memory ranges mapped into multiple locations of sparse images
+pub const IMAGE_CREATE_SPARSE_ALIASED_BIT: u32 = 4; // Image should support constant data access to physical memory ranges mapped into multiple locations of sparse images
 pub const IMAGE_CREATE_MUTABLE_FORMAT_BIT: u32 = 8; // Allows image views to have different format than the base image
 pub const IMAGE_CREATE_CUBE_COMPATIBLE_BIT: u32 = 16; // Allows creating image views with cube type from the created image
 pub const IMAGE_CREATE_ALIAS_BIT: u32 = 1024;
@@ -392,6 +408,10 @@ pub const FORMAT_FEATURE_DISJOINT_BIT: u32 = 4194304; // Format supports disjoin
 pub const FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT: u32 = 8388608; // Format can have cosited rather than midpoint chroma samples
 pub const FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_MINMAX_BIT: u32 = 65536; // Format can be used with min/max reduction filtering
 pub const FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG: u32 = 8192; // Format can be filtered with VK_FILTER_CUBIC_IMG when being sampled
+pub const FORMAT_FEATURE_VIDEO_DECODE_OUTPUT_BIT_KHR: u32 = 33554432;
+pub const FORMAT_FEATURE_VIDEO_DECODE_DPB_BIT_KHR: u32 = 67108864;
+pub const FORMAT_FEATURE_VIDEO_ENCODE_INPUT_BIT_KHR: u32 = 134217728;
+pub const FORMAT_FEATURE_VIDEO_ENCODE_DPB_BIT_KHR: u32 = 268435456;
 pub const FORMAT_FEATURE_TRANSFER_SRC_BIT_KHR: u32 = FORMAT_FEATURE_TRANSFER_SRC_BIT;
 pub const FORMAT_FEATURE_TRANSFER_DST_BIT_KHR: u32 = FORMAT_FEATURE_TRANSFER_DST_BIT;
 pub const FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_MINMAX_BIT_EXT: u32 = FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_MINMAX_BIT;
@@ -417,11 +437,14 @@ pub const QUERY_RESULT_64_BIT: u32 = 1; // Results of the queries are written to
 pub const QUERY_RESULT_WAIT_BIT: u32 = 2; // Results of the queries are waited on before proceeding with the result copy
 pub const QUERY_RESULT_WITH_AVAILABILITY_BIT: u32 = 4; // Besides the results of the query, the availability of the results is also written
 pub const QUERY_RESULT_PARTIAL_BIT: u32 = 8; // Copy the partial results of the query even if the final results are not available
+pub const QUERY_RESULT_WITH_STATUS_BIT_KHR: u32 = 16;
 
 pub type ShaderModuleCreateFlags = Flags;
 pub type ShaderModuleCreateFlagBits = u32;
 
 pub type EventCreateFlags = Flags;
+pub type EventCreateFlagBits = u32;
+pub const EVENT_CREATE_DEVICE_ONLY_BIT_KHR: u32 = 1;
 
 pub type CommandPoolCreateFlags = Flags;
 pub type CommandPoolCreateFlagBits = u32;
@@ -524,6 +547,7 @@ pub const PIPELINE_STAGE_MESH_SHADER_BIT_NV: u32 = 1048576;
 pub const PIPELINE_STAGE_FRAGMENT_DENSITY_PROCESS_BIT_EXT: u32 = 8388608;
 pub const PIPELINE_STAGE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR: u32 = PIPELINE_STAGE_SHADING_RATE_IMAGE_BIT_NV;
 pub const PIPELINE_STAGE_COMMAND_PREPROCESS_BIT_NV: u32 = 131072;
+pub const PIPELINE_STAGE_NONE_KHR: u32 = 0;
 
 pub type SampleCountFlags = Flags;
 pub type SampleCountFlagBits = u32;
@@ -675,6 +699,10 @@ pub const DEVICE_DIAGNOSTICS_CONFIG_ENABLE_SHADER_DEBUG_INFO_BIT_NV: u32 = 1;
 pub const DEVICE_DIAGNOSTICS_CONFIG_ENABLE_RESOURCE_TRACKING_BIT_NV: u32 = 2;
 pub const DEVICE_DIAGNOSTICS_CONFIG_ENABLE_AUTOMATIC_CHECKPOINTS_BIT_NV: u32 = 4;
 
+pub type AccessFlags2KHR = Flags64;
+
+pub type PipelineStageFlags2KHR = Flags64;
+
 pub type CompositeAlphaFlagsKHR = Flags;
 pub type CompositeAlphaFlagBitsKHR = u32;
 pub const COMPOSITE_ALPHA_OPAQUE_BIT_KHR: u32 = 1;
@@ -736,6 +764,8 @@ pub type ImagePipeSurfaceCreateFlagsFUCHSIA = Flags;
 pub type StreamDescriptorSurfaceCreateFlagsGGP = Flags;
 
 pub type HeadlessSurfaceCreateFlagsEXT = Flags;
+
+pub type ScreenSurfaceCreateFlagsQNX = Flags;
 
 pub type PeerMemoryFeatureFlags = Flags;
 pub type PeerMemoryFeatureFlagBits = u32;
@@ -975,6 +1005,117 @@ pub const TOOL_PURPOSE_MODIFYING_FEATURES_BIT_EXT: u32 = 16;
 pub const TOOL_PURPOSE_DEBUG_REPORTING_BIT_EXT: u32 = 32;
 pub const TOOL_PURPOSE_DEBUG_MARKERS_BIT_EXT: u32 = 64;
 
+pub type SubmitFlagsKHR = Flags;
+pub type SubmitFlagBitsKHR = u32;
+pub const SUBMIT_PROTECTED_BIT_KHR: u32 = 1;
+
+pub type VideoCodecOperationFlagsKHR = Flags;
+pub type VideoCodecOperationFlagBitsKHR = u32;
+pub const VIDEO_CODEC_OPERATION_INVALID_BIT_KHR: u32 = 0;
+
+pub type VideoCapabilitiesFlagsKHR = Flags;
+pub type VideoCapabilitiesFlagBitsKHR = u32;
+pub const VIDEO_CAPABILITIES_PROTECTED_CONTENT_BIT_KHR: u32 = 1;
+pub const VIDEO_CAPABILITIES_SEPARATE_REFERENCE_IMAGES_BIT_KHR: u32 = 2;
+
+pub type VideoSessionCreateFlagsKHR = Flags;
+pub type VideoSessionCreateFlagBitsKHR = u32;
+pub const VIDEO_SESSION_CREATE_DEFAULT_KHR: u32 = 0;
+pub const VIDEO_SESSION_CREATE_PROTECTED_CONTENT_BIT_KHR: u32 = 1;
+
+pub type VideoBeginCodingFlagsKHR = Flags;
+
+pub type VideoEndCodingFlagsKHR = Flags;
+
+pub type VideoCodingQualityPresetFlagsKHR = Flags;
+pub type VideoCodingQualityPresetFlagBitsKHR = u32;
+pub const VIDEO_CODING_QUALITY_PRESET_DEFAULT_BIT_KHR: u32 = 0;
+pub const VIDEO_CODING_QUALITY_PRESET_NORMAL_BIT_KHR: u32 = 1;
+pub const VIDEO_CODING_QUALITY_PRESET_POWER_BIT_KHR: u32 = 2;
+pub const VIDEO_CODING_QUALITY_PRESET_QUALITY_BIT_KHR: u32 = 4;
+
+pub type VideoCodingControlFlagsKHR = Flags;
+pub type VideoCodingControlFlagBitsKHR = u32;
+pub const VIDEO_CODING_CONTROL_DEFAULT_KHR: u32 = 0;
+pub const VIDEO_CODING_CONTROL_RESET_BIT_KHR: u32 = 1;
+
+pub type VideoDecodeFlagsKHR = Flags;
+pub type VideoDecodeFlagBitsKHR = u32;
+pub const VIDEO_DECODE_DEFAULT_KHR: u32 = 0;
+pub const VIDEO_DECODE_RESERVED_0_BIT_KHR: u32 = 1;
+
+pub type VideoDecodeH264FieldLayoutFlagsEXT = Flags;
+pub type VideoDecodeH264FieldLayoutFlagBitsEXT = u32;
+pub const VIDEO_DECODE_H264_PROGRESSIVE_PICTURES_ONLY_EXT: u32 = 0;
+pub const VIDEO_DECODE_H264_FIELD_LAYOUT_LINE_INTERLACED_PLANE_BIT_EXT: u32 = 1;
+pub const VIDEO_DECODE_H264_FIELD_LAYOUT_SEPARATE_INTERLACED_PLANE_BIT_EXT: u32 = 2;
+
+pub type VideoDecodeH264CreateFlagsEXT = Flags;
+
+pub type VideoDecodeH265CreateFlagsEXT = Flags;
+
+pub type VideoEncodeFlagsKHR = Flags;
+pub type VideoEncodeFlagBitsKHR = u32;
+pub const VIDEO_ENCODE_DEFAULT_KHR: u32 = 0;
+pub const VIDEO_ENCODE_RESERVED_0_BIT_KHR: u32 = 1;
+
+pub type VideoEncodeRateControlFlagsKHR = Flags;
+pub type VideoEncodeRateControlFlagBitsKHR = u32;
+pub const VIDEO_ENCODE_RATE_CONTROL_DEFAULT_KHR: u32 = 0;
+pub const VIDEO_ENCODE_RATE_CONTROL_RESET_BIT_KHR: u32 = 1;
+
+pub type VideoEncodeRateControlModeFlagsKHR = Flags;
+pub type VideoEncodeRateControlModeFlagBitsKHR = u32;
+pub const VIDEO_ENCODE_RATE_CONTROL_MODE_NONE_BIT_KHR: u32 = 0;
+pub const VIDEO_ENCODE_RATE_CONTROL_MODE_CBR_BIT_KHR: u32 = 1;
+pub const VIDEO_ENCODE_RATE_CONTROL_MODE_VBR_BIT_KHR: u32 = 2;
+
+pub type VideoChromaSubsamplingFlagsKHR = Flags;
+pub type VideoChromaSubsamplingFlagBitsKHR = u32;
+pub const VIDEO_CHROMA_SUBSAMPLING_INVALID_BIT_KHR: u32 = 0;
+pub const VIDEO_CHROMA_SUBSAMPLING_MONOCHROME_BIT_KHR: u32 = 1;
+pub const VIDEO_CHROMA_SUBSAMPLING_420_BIT_KHR: u32 = 2;
+pub const VIDEO_CHROMA_SUBSAMPLING_422_BIT_KHR: u32 = 4;
+pub const VIDEO_CHROMA_SUBSAMPLING_444_BIT_KHR: u32 = 8;
+
+pub type VideoComponentBitDepthFlagsKHR = Flags;
+pub type VideoComponentBitDepthFlagBitsKHR = u32;
+pub const VIDEO_COMPONENT_BIT_DEPTH_INVALID_KHR: u32 = 0;
+pub const VIDEO_COMPONENT_BIT_DEPTH_8_BIT_KHR: u32 = 1;
+pub const VIDEO_COMPONENT_BIT_DEPTH_10_BIT_KHR: u32 = 4;
+pub const VIDEO_COMPONENT_BIT_DEPTH_12_BIT_KHR: u32 = 16;
+
+pub type VideoEncodeH264CapabilitiesFlagsEXT = Flags;
+pub type VideoEncodeH264CapabilitiesFlagBitsEXT = u32;
+pub const VIDEO_ENCODE_H264_CAPABILITY_CABAC_BIT_EXT: u32 = 1;
+pub const VIDEO_ENCODE_H264_CAPABILITY_CAVLC_BIT_EXT: u32 = 2;
+pub const VIDEO_ENCODE_H264_CAPABILITY_WEIGHTED_BI_PRED_IMPLICIT_BIT_EXT: u32 = 4;
+pub const VIDEO_ENCODE_H264_CAPABILITY_TRANSFORM_8X8_BIT_EXT: u32 = 8;
+pub const VIDEO_ENCODE_H264_CAPABILITY_CHROMA_QP_OFFSET_BIT_EXT: u32 = 16;
+pub const VIDEO_ENCODE_H264_CAPABILITY_SECOND_CHROMA_QP_OFFSET_BIT_EXT: u32 = 32;
+pub const VIDEO_ENCODE_H264_CAPABILITY_DEBLOCKING_FILTER_DISABLED_BIT_EXT: u32 = 64;
+pub const VIDEO_ENCODE_H264_CAPABILITY_DEBLOCKING_FILTER_ENABLED_BIT_EXT: u32 = 128;
+pub const VIDEO_ENCODE_H264_CAPABILITY_DEBLOCKING_FILTER_PARTIAL_BIT_EXT: u32 = 256;
+pub const VIDEO_ENCODE_H264_CAPABILITY_MULTIPLE_SLICE_PER_FRAME_BIT_EXT: u32 = 512;
+pub const VIDEO_ENCODE_H264_CAPABILITY_EVENLY_DISTRIBUTED_SLICE_SIZE_BIT_EXT: u32 = 1024;
+
+pub type VideoEncodeH264InputModeFlagsEXT = Flags;
+pub type VideoEncodeH264InputModeFlagBitsEXT = u32;
+pub const VIDEO_ENCODE_H264_INPUT_MODE_FRAME_BIT_EXT: u32 = 1;
+pub const VIDEO_ENCODE_H264_INPUT_MODE_SLICE_BIT_EXT: u32 = 2;
+pub const VIDEO_ENCODE_H264_INPUT_MODE_NON_VCL_BIT_EXT: u32 = 4;
+
+pub type VideoEncodeH264OutputModeFlagsEXT = Flags;
+pub type VideoEncodeH264OutputModeFlagBitsEXT = u32;
+pub const VIDEO_ENCODE_H264_OUTPUT_MODE_FRAME_BIT_EXT: u32 = 1;
+pub const VIDEO_ENCODE_H264_OUTPUT_MODE_SLICE_BIT_EXT: u32 = 2;
+pub const VIDEO_ENCODE_H264_OUTPUT_MODE_NON_VCL_BIT_EXT: u32 = 4;
+
+pub type VideoEncodeH264CreateFlagsEXT = Flags;
+pub type VideoEncodeH264CreateFlagBitsEXT = u32;
+pub const VIDEO_ENCODE_H264_CREATE_DEFAULT_EXT: u32 = 0;
+pub const VIDEO_ENCODE_H264_CREATE_RESERVED_0_BIT_EXT: u32 = 1;
+
 
 // enums
 
@@ -995,6 +1136,12 @@ pub const IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL: i32 = 1000241001;
 pub const IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL: i32 = 1000241002;
 pub const IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL: i32 = 1000241003;
 pub const IMAGE_LAYOUT_PRESENT_SRC_KHR: i32 = 1000001002;
+pub const IMAGE_LAYOUT_VIDEO_DECODE_DST_KHR: i32 = 1000024000;
+pub const IMAGE_LAYOUT_VIDEO_DECODE_SRC_KHR: i32 = 1000024001;
+pub const IMAGE_LAYOUT_VIDEO_DECODE_DPB_KHR: i32 = 1000024002;
+pub const IMAGE_LAYOUT_VIDEO_ENCODE_DST_KHR: i32 = 1000299000;
+pub const IMAGE_LAYOUT_VIDEO_ENCODE_SRC_KHR: i32 = 1000299001;
+pub const IMAGE_LAYOUT_VIDEO_ENCODE_DPB_KHR: i32 = 1000299002;
 pub const IMAGE_LAYOUT_SHARED_PRESENT_KHR: i32 = 1000111000;
 pub const IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL_KHR: i32 = IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL;
 pub const IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL_KHR: i32 = IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL;
@@ -1005,6 +1152,8 @@ pub const IMAGE_LAYOUT_DEPTH_ATTACHMENT_OPTIMAL_KHR: i32 = IMAGE_LAYOUT_DEPTH_AT
 pub const IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL_KHR: i32 = IMAGE_LAYOUT_DEPTH_READ_ONLY_OPTIMAL;
 pub const IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL_KHR: i32 = IMAGE_LAYOUT_STENCIL_ATTACHMENT_OPTIMAL;
 pub const IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL_KHR: i32 = IMAGE_LAYOUT_STENCIL_READ_ONLY_OPTIMAL;
+pub const IMAGE_LAYOUT_READ_ONLY_OPTIMAL_KHR: i32 = 1000314000;
+pub const IMAGE_LAYOUT_ATTACHMENT_OPTIMAL_KHR: i32 = 1000314001;
 
 pub type AttachmentLoadOp = i32;
 pub const ATTACHMENT_LOAD_OP_LOAD: i32 = 0;
@@ -1069,6 +1218,8 @@ pub type QueryType = i32;
 pub const QUERY_TYPE_OCCLUSION: i32 = 0;
 pub const QUERY_TYPE_PIPELINE_STATISTICS: i32 = 1; // Optional
 pub const QUERY_TYPE_TIMESTAMP: i32 = 2;
+pub const QUERY_TYPE_RESULT_STATUS_ONLY_KHR: i32 = 1000023000;
+pub const QUERY_TYPE_VIDEO_ENCODE_BITSTREAM_BUFFER_RANGE_KHR: i32 = 1000299000;
 pub const QUERY_TYPE_TRANSFORM_FEEDBACK_STREAM_EXT: i32 = 1000028004;
 pub const QUERY_TYPE_PERFORMANCE_QUERY_KHR: i32 = 1000116000;
 pub const QUERY_TYPE_ACCELERATION_STRUCTURE_COMPACTED_SIZE_KHR: i32 = 1000150000;
@@ -1557,6 +1708,10 @@ pub const FORMAT_G16_B16R16_2PLANE_420_UNORM_KHR: i32 = FORMAT_G16_B16R16_2PLANE
 pub const FORMAT_G16_B16_R16_3PLANE_422_UNORM_KHR: i32 = FORMAT_G16_B16_R16_3PLANE_422_UNORM;
 pub const FORMAT_G16_B16R16_2PLANE_422_UNORM_KHR: i32 = FORMAT_G16_B16R16_2PLANE_422_UNORM;
 pub const FORMAT_G16_B16_R16_3PLANE_444_UNORM_KHR: i32 = FORMAT_G16_B16_R16_3PLANE_444_UNORM;
+pub const FORMAT_G8_B8R8_2PLANE_444_UNORM_EXT: i32 = 1000330000;
+pub const FORMAT_G10X6_B10X6R10X6_2PLANE_444_UNORM_3PACK16_EXT: i32 = 1000330001;
+pub const FORMAT_G12X4_B12X4R12X4_2PLANE_444_UNORM_3PACK16_EXT: i32 = 1000330002;
+pub const FORMAT_G16_B16R16_2PLANE_444_UNORM_EXT: i32 = 1000330003;
 pub const FORMAT_A4R4G4B4_UNORM_PACK16_EXT: i32 = 1000340000;
 pub const FORMAT_A4B4G4R4_UNORM_PACK16_EXT: i32 = 1000340001;
 
@@ -1745,6 +1900,25 @@ pub const STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_RASTERIZATION_ORDER_AMD: i
 pub const STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_NAME_INFO_EXT: i32 = 1000022000;
 pub const STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_TAG_INFO_EXT: i32 = 1000022001;
 pub const STRUCTURE_TYPE_DEBUG_MARKER_MARKER_INFO_EXT: i32 = 1000022002;
+pub const STRUCTURE_TYPE_VIDEO_PROFILE_KHR: i32 = 1000023000;
+pub const STRUCTURE_TYPE_VIDEO_CAPABILITIES_KHR: i32 = 1000023001;
+pub const STRUCTURE_TYPE_VIDEO_PICTURE_RESOURCE_KHR: i32 = 1000023002;
+pub const STRUCTURE_TYPE_VIDEO_GET_MEMORY_PROPERTIES_KHR: i32 = 1000023003;
+pub const STRUCTURE_TYPE_VIDEO_BIND_MEMORY_KHR: i32 = 1000023004;
+pub const STRUCTURE_TYPE_VIDEO_SESSION_CREATE_INFO_KHR: i32 = 1000023005;
+pub const STRUCTURE_TYPE_VIDEO_SESSION_PARAMETERS_CREATE_INFO_KHR: i32 = 1000023006;
+pub const STRUCTURE_TYPE_VIDEO_SESSION_PARAMETERS_UPDATE_INFO_KHR: i32 = 1000023007;
+pub const STRUCTURE_TYPE_VIDEO_BEGIN_CODING_INFO_KHR: i32 = 1000023008;
+pub const STRUCTURE_TYPE_VIDEO_END_CODING_INFO_KHR: i32 = 1000023009;
+pub const STRUCTURE_TYPE_VIDEO_CODING_CONTROL_INFO_KHR: i32 = 1000023010;
+pub const STRUCTURE_TYPE_VIDEO_REFERENCE_SLOT_KHR: i32 = 1000023011;
+pub const STRUCTURE_TYPE_VIDEO_QUEUE_FAMILY_PROPERTIES_2_KHR: i32 = 1000023012;
+pub const STRUCTURE_TYPE_VIDEO_PROFILES_KHR: i32 = 1000023013;
+pub const STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_FORMAT_INFO_KHR: i32 = 1000023014;
+pub const STRUCTURE_TYPE_VIDEO_FORMAT_PROPERTIES_KHR: i32 = 1000023015;
+pub const STRUCTURE_TYPE_VIDEO_DECODE_INFO_KHR: i32 = 1000024000;
+pub const STRUCTURE_TYPE_VIDEO_ENCODE_INFO_KHR: i32 = 1000299000;
+pub const STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_INFO_KHR: i32 = 1000299001;
 pub const STRUCTURE_TYPE_DEDICATED_ALLOCATION_IMAGE_CREATE_INFO_NV: i32 = 1000026000;
 pub const STRUCTURE_TYPE_DEDICATED_ALLOCATION_BUFFER_CREATE_INFO_NV: i32 = 1000026001;
 pub const STRUCTURE_TYPE_DEDICATED_ALLOCATION_MEMORY_ALLOCATE_INFO_NV: i32 = 1000026002;
@@ -2072,6 +2246,8 @@ pub const STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_CREATE_INFO_NV: i32 = 10002770
 pub const STRUCTURE_TYPE_GENERATED_COMMANDS_INFO_NV: i32 = 1000277005;
 pub const STRUCTURE_TYPE_GENERATED_COMMANDS_MEMORY_REQUIREMENTS_INFO_NV: i32 = 1000277006;
 pub const STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_FEATURES_NV: i32 = 1000277007;
+pub const STRUCTURE_TYPE_PHYSICAL_DEVICE_INHERITED_VIEWPORT_SCISSOR_FEATURES_NV: i32 = 1000278000;
+pub const STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_VIEWPORT_SCISSOR_INFO_NV: i32 = 1000278001;
 pub const STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_FEATURES_EXT: i32 = 1000281000;
 pub const STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_PROPERTIES_EXT: i32 = 1000281001;
 pub const STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDER_PASS_TRANSFORM_INFO_QCOM: i32 = 1000282000;
@@ -2091,10 +2267,21 @@ pub const STRUCTURE_TYPE_PRIVATE_DATA_SLOT_CREATE_INFO_EXT: i32 = 1000295002;
 pub const STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_CREATION_CACHE_CONTROL_FEATURES_EXT: i32 = 1000297000;
 pub const STRUCTURE_TYPE_PHYSICAL_DEVICE_DIAGNOSTICS_CONFIG_FEATURES_NV: i32 = 1000300000;
 pub const STRUCTURE_TYPE_DEVICE_DIAGNOSTICS_CONFIG_CREATE_INFO_NV: i32 = 1000300001;
+pub const STRUCTURE_TYPE_MEMORY_BARRIER_2_KHR: i32 = 1000314000;
+pub const STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER_2_KHR: i32 = 1000314001;
+pub const STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER_2_KHR: i32 = 1000314002;
+pub const STRUCTURE_TYPE_DEPENDENCY_INFO_KHR: i32 = 1000314003;
+pub const STRUCTURE_TYPE_SUBMIT_INFO_2_KHR: i32 = 1000314004;
+pub const STRUCTURE_TYPE_SEMAPHORE_SUBMIT_INFO_KHR: i32 = 1000314005;
+pub const STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO_KHR: i32 = 1000314006;
+pub const STRUCTURE_TYPE_PHYSICAL_DEVICE_SYNCHRONIZATION_2_FEATURES_KHR: i32 = 1000314007;
+pub const STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_2_NV: i32 = 1000314008;
+pub const STRUCTURE_TYPE_CHECKPOINT_DATA_2_NV: i32 = 1000314009;
 pub const STRUCTURE_TYPE_PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES_KHR: i32 = 1000325000;
 pub const STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_ENUMS_PROPERTIES_NV: i32 = 1000326000;
 pub const STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_ENUMS_FEATURES_NV: i32 = 1000326001;
 pub const STRUCTURE_TYPE_PIPELINE_FRAGMENT_SHADING_RATE_ENUM_STATE_CREATE_INFO_NV: i32 = 1000326002;
+pub const STRUCTURE_TYPE_PHYSICAL_DEVICE_YCBCR_2_PLANE_444_FORMATS_FEATURES_EXT: i32 = 1000330000;
 pub const STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_FEATURES_EXT: i32 = 1000332000;
 pub const STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_PROPERTIES_EXT: i32 = 1000332001;
 pub const STRUCTURE_TYPE_COPY_COMMAND_TRANSFORM_INFO_QCOM: i32 = 1000333000;
@@ -2114,6 +2301,12 @@ pub const STRUCTURE_TYPE_IMAGE_RESOLVE_2_KHR: i32 = 1000337010;
 pub const STRUCTURE_TYPE_PHYSICAL_DEVICE_4444_FORMATS_FEATURES_EXT: i32 = 1000340000;
 pub const STRUCTURE_TYPE_PHYSICAL_DEVICE_MUTABLE_DESCRIPTOR_TYPE_FEATURES_VALVE: i32 = 1000351000;
 pub const STRUCTURE_TYPE_MUTABLE_DESCRIPTOR_TYPE_CREATE_INFO_VALVE: i32 = 1000351002;
+pub const STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_INPUT_DYNAMIC_STATE_FEATURES_EXT: i32 = 1000352000;
+pub const STRUCTURE_TYPE_VERTEX_INPUT_BINDING_DESCRIPTION_2_EXT: i32 = 1000352001;
+pub const STRUCTURE_TYPE_VERTEX_INPUT_ATTRIBUTE_DESCRIPTION_2_EXT: i32 = 1000352002;
+pub const STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_2_FEATURES_EXT: i32 = 1000377000;
+pub const STRUCTURE_TYPE_PHYSICAL_DEVICE_COLOR_WRITE_ENABLE_FEATURES_EXT: i32 = 1000381000;
+pub const STRUCTURE_TYPE_PIPELINE_COLOR_WRITE_CREATE_INFO_EXT: i32 = 1000381001;
 
 pub type SubpassContents = i32;
 pub const SUBPASS_CONTENTS_INLINE: i32 = 0;
@@ -2196,6 +2389,13 @@ pub const DYNAMIC_STATE_DEPTH_COMPARE_OP_EXT: i32 = 1000267008;
 pub const DYNAMIC_STATE_DEPTH_BOUNDS_TEST_ENABLE_EXT: i32 = 1000267009;
 pub const DYNAMIC_STATE_STENCIL_TEST_ENABLE_EXT: i32 = 1000267010;
 pub const DYNAMIC_STATE_STENCIL_OP_EXT: i32 = 1000267011;
+pub const DYNAMIC_STATE_VERTEX_INPUT_EXT: i32 = 1000352000;
+pub const DYNAMIC_STATE_PATCH_CONTROL_POINTS_EXT: i32 = 1000377000;
+pub const DYNAMIC_STATE_RASTERIZER_DISCARD_ENABLE_EXT: i32 = 1000377001;
+pub const DYNAMIC_STATE_DEPTH_BIAS_ENABLE_EXT: i32 = 1000377002;
+pub const DYNAMIC_STATE_LOGIC_OP_EXT: i32 = 1000377003;
+pub const DYNAMIC_STATE_PRIMITIVE_RESTART_ENABLE_EXT: i32 = 1000377004;
+pub const DYNAMIC_STATE_COLOR_WRITE_ENABLE_EXT: i32 = 1000381000;
 
 pub type DescriptorUpdateTemplateType = i32;
 pub const DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET: i32 = 0; // Create descriptor update template for descriptor set updates
@@ -2237,6 +2437,8 @@ pub const OBJECT_TYPE_SWAPCHAIN_KHR: i32 = 1000001000;
 pub const OBJECT_TYPE_DISPLAY_KHR: i32 = 1000002000;
 pub const OBJECT_TYPE_DISPLAY_MODE_KHR: i32 = 1000002001;
 pub const OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT: i32 = 1000011000;
+pub const OBJECT_TYPE_VIDEO_SESSION_KHR: i32 = 1000023000; // VkVideoSessionKHR
+pub const OBJECT_TYPE_VIDEO_SESSION_PARAMETERS_KHR: i32 = 1000023001; // VkVideoSessionParametersKHR
 pub const OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_KHR: i32 = OBJECT_TYPE_DESCRIPTOR_UPDATE_TEMPLATE;
 pub const OBJECT_TYPE_DEBUG_UTILS_MESSENGER_EXT: i32 = 1000128000;
 pub const OBJECT_TYPE_ACCELERATION_STRUCTURE_KHR: i32 = 1000150000;
@@ -2497,6 +2699,7 @@ pub const DRIVER_ID_GGP_PROPRIETARY: i32 = 11; // Google LLC
 pub const DRIVER_ID_BROADCOM_PROPRIETARY: i32 = 12; // Broadcom Inc.
 pub const DRIVER_ID_MESA_LLVMPIPE: i32 = 13; // Mesa
 pub const DRIVER_ID_MOLTENVK: i32 = 14; // MoltenVK
+pub const DRIVER_ID_COREAVI_PROPRIETARY: i32 = 15; // Core Avionics & Industrial Inc.
 pub const DRIVER_ID_AMD_PROPRIETARY_KHR: i32 = DRIVER_ID_AMD_PROPRIETARY;
 pub const DRIVER_ID_AMD_OPEN_SOURCE_KHR: i32 = DRIVER_ID_AMD_OPEN_SOURCE;
 pub const DRIVER_ID_MESA_RADV_KHR: i32 = DRIVER_ID_MESA_RADV;
@@ -2708,6 +2911,15 @@ pub const FRAGMENT_SHADING_RATE_NO_INVOCATIONS_NV: i32 = 15;
 pub type FragmentShadingRateTypeNV = i32;
 pub const FRAGMENT_SHADING_RATE_TYPE_FRAGMENT_SIZE_NV: i32 = 0;
 pub const FRAGMENT_SHADING_RATE_TYPE_ENUMS_NV: i32 = 1;
+
+pub type AccessFlagBits2KHR = u32;
+
+pub type PipelineStageFlagBits2KHR = u32;
+
+pub type QueryResultStatusKHR = i32;
+pub const QUERY_RESULT_STATUS_ERROR_KHR: i32 = -1;
+pub const QUERY_RESULT_STATUS_NOT_READY_KHR: i32 = 0;
+pub const QUERY_RESULT_STATUS_COMPLETE_KHR: i32 = 1;
 
 
 // enum aliases
@@ -8368,6 +8580,16 @@ pub struct PhysicalDeviceExtendedDynamicStateFeaturesEXT {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
+pub struct PhysicalDeviceExtendedDynamicState2FeaturesEXT {
+    pub sType: StructureType,
+    pub pNext: *mut c_void,
+    pub extendedDynamicState2: Bool32,
+    pub extendedDynamicState2LogicOp: Bool32,
+    pub extendedDynamicState2PatchControlPoints: Bool32,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
 pub struct RenderPassTransformBeginInfoQCOM {
     pub sType: StructureType,
     pub pNext: *mut c_void, // Pointer to next structure
@@ -8765,6 +8987,405 @@ pub struct MutableDescriptorTypeCreateInfoVALVE {
     pub pMutableDescriptorTypeLists: *const MutableDescriptorTypeListVALVE,
 }
 
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct PhysicalDeviceVertexInputDynamicStateFeaturesEXT {
+    pub sType: StructureType,
+    pub pNext: *mut c_void,
+    pub vertexInputDynamicState: Bool32,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct VertexInputBindingDescription2EXT {
+    pub sType: StructureType,
+    pub pNext: *mut c_void,
+    pub binding: u32,
+    pub stride: u32,
+    pub inputRate: VertexInputRate,
+    pub divisor: u32,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct VertexInputAttributeDescription2EXT {
+    pub sType: StructureType,
+    pub pNext: *mut c_void,
+    pub location: u32, // location of the shader vertex attrib
+    pub binding: u32, // Vertex buffer binding id
+    pub format: Format, // format of source data
+    pub offset: u32, // Offset of first element in bytes from base of vertex
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct PhysicalDeviceColorWriteEnableFeaturesEXT {
+    pub sType: StructureType,
+    pub pNext: *mut c_void,
+    pub colorWriteEnable: Bool32,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct PipelineColorWriteCreateInfoEXT {
+    pub sType: StructureType,
+    pub pNext: *const c_void,
+    pub attachmentCount: u32, // # of pAttachments
+    pub pColorWriteEnables: *const Bool32,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct MemoryBarrier2KHR {
+    pub sType: StructureType,
+    pub pNext: *const c_void,
+    pub srcStageMask: PipelineStageFlags2KHR,
+    pub srcAccessMask: AccessFlags2KHR,
+    pub dstStageMask: PipelineStageFlags2KHR,
+    pub dstAccessMask: AccessFlags2KHR,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct ImageMemoryBarrier2KHR {
+    pub sType: StructureType,
+    pub pNext: *const c_void,
+    pub srcStageMask: PipelineStageFlags2KHR,
+    pub srcAccessMask: AccessFlags2KHR,
+    pub dstStageMask: PipelineStageFlags2KHR,
+    pub dstAccessMask: AccessFlags2KHR,
+    pub oldLayout: ImageLayout,
+    pub newLayout: ImageLayout,
+    pub srcQueueFamilyIndex: u32,
+    pub dstQueueFamilyIndex: u32,
+    pub image: Image,
+    pub subresourceRange: ImageSubresourceRange,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct BufferMemoryBarrier2KHR {
+    pub sType: StructureType,
+    pub pNext: *const c_void,
+    pub srcStageMask: PipelineStageFlags2KHR,
+    pub srcAccessMask: AccessFlags2KHR,
+    pub dstStageMask: PipelineStageFlags2KHR,
+    pub dstAccessMask: AccessFlags2KHR,
+    pub srcQueueFamilyIndex: u32,
+    pub dstQueueFamilyIndex: u32,
+    pub buffer: Buffer,
+    pub offset: DeviceSize,
+    pub size: DeviceSize,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct DependencyInfoKHR {
+    pub sType: StructureType,
+    pub pNext: *const c_void,
+    pub dependencyFlags: DependencyFlags,
+    pub memoryBarrierCount: u32,
+    pub pMemoryBarriers: *const MemoryBarrier2KHR,
+    pub bufferMemoryBarrierCount: u32,
+    pub pBufferMemoryBarriers: *const BufferMemoryBarrier2KHR,
+    pub imageMemoryBarrierCount: u32,
+    pub pImageMemoryBarriers: *const ImageMemoryBarrier2KHR,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct SemaphoreSubmitInfoKHR {
+    pub sType: StructureType,
+    pub pNext: *const c_void,
+    pub semaphore: Semaphore,
+    pub value: u64,
+    pub stageMask: PipelineStageFlags2KHR,
+    pub deviceIndex: u32,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct CommandBufferSubmitInfoKHR {
+    pub sType: StructureType,
+    pub pNext: *const c_void,
+    pub commandBuffer: CommandBuffer,
+    pub deviceMask: u32,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct SubmitInfo2KHR {
+    pub sType: StructureType,
+    pub pNext: *const c_void,
+    pub flags: SubmitFlagsKHR,
+    pub waitSemaphoreInfoCount: u32,
+    pub pWaitSemaphoreInfos: *const SemaphoreSubmitInfoKHR,
+    pub commandBufferInfoCount: u32,
+    pub pCommandBufferInfos: *const CommandBufferSubmitInfoKHR,
+    pub signalSemaphoreInfoCount: u32,
+    pub pSignalSemaphoreInfos: *const SemaphoreSubmitInfoKHR,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct QueueFamilyCheckpointProperties2NV {
+    pub sType: StructureType,
+    pub pNext: *mut c_void,
+    pub checkpointExecutionStageMask: PipelineStageFlags2KHR,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct CheckpointData2NV {
+    pub sType: StructureType,
+    pub pNext: *mut c_void,
+    pub stage: PipelineStageFlags2KHR,
+    pub pCheckpointMarker: *mut c_void,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct PhysicalDeviceSynchronization2FeaturesKHR {
+    pub sType: StructureType,
+    pub pNext: *mut c_void,
+    pub synchronization2: Bool32,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct VideoQueueFamilyProperties2KHR {
+    pub sType: StructureType,
+    pub pNext: *mut c_void,
+    pub videoCodecOperations: VideoCodecOperationFlagsKHR,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct VideoProfilesKHR {
+    pub sType: StructureType,
+    pub pNext: *mut c_void,
+    pub profileCount: u32,
+    pub pProfiles: *const VideoProfileKHR,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct PhysicalDeviceVideoFormatInfoKHR {
+    pub sType: StructureType,
+    pub pNext: *const c_void,
+    pub imageUsage: ImageUsageFlags,
+    pub pVideoProfiles: *const VideoProfilesKHR,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct VideoFormatPropertiesKHR {
+    pub sType: StructureType,
+    pub pNext: *mut c_void,
+    pub format: Format,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct VideoProfileKHR {
+    pub sType: StructureType,
+    pub pNext: *mut c_void,
+    pub videoCodecOperation: VideoCodecOperationFlagBitsKHR,
+    pub chromaSubsampling: VideoChromaSubsamplingFlagsKHR,
+    pub lumaBitDepth: VideoComponentBitDepthFlagsKHR,
+    pub chromaBitDepth: VideoComponentBitDepthFlagsKHR,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct VideoCapabilitiesKHR {
+    pub sType: StructureType,
+    pub pNext: *mut c_void,
+    pub capabilityFlags: VideoCapabilitiesFlagsKHR,
+    pub minBitstreamBufferOffsetAlignment: DeviceSize,
+    pub minBitstreamBufferSizeAlignment: DeviceSize,
+    pub videoPictureExtentGranularity: Extent2D,
+    pub minExtent: Extent2D,
+    pub maxExtent: Extent2D,
+    pub maxReferencePicturesSlotsCount: u32,
+    pub maxReferencePicturesActiveCount: u32,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct VideoGetMemoryPropertiesKHR {
+    pub sType: StructureType,
+    pub pNext: *const c_void,
+    pub memoryBindIndex: u32,
+    pub pMemoryRequirements: *mut MemoryRequirements2,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct VideoBindMemoryKHR {
+    pub sType: StructureType,
+    pub pNext: *const c_void,
+    pub memoryBindIndex: u32,
+    pub memory: DeviceMemory,
+    pub memoryOffset: DeviceSize,
+    pub memorySize: DeviceSize,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct VideoPictureResourceKHR {
+    pub sType: StructureType,
+    pub pNext: *const c_void,
+    pub codedOffset: Offset2D, // The offset to be used for the picture resource, currently only used in field mode
+    pub codedExtent: Extent2D, // The extent to be used for the picture resource
+    pub baseArrayLayer: u32, // TThe first array layer to be accessed for the Decode or Encode Operations
+    pub imageViewBinding: ImageView, // The ImageView binding of the resource
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct VideoReferenceSlotKHR {
+    pub sType: StructureType,
+    pub pNext: *const c_void,
+    pub slotIndex: i8, // The reference slot index
+    pub pPictureResource: *const VideoPictureResourceKHR, // The reference picture resource
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct VideoDecodeInfoKHR {
+    pub sType: StructureType,
+    pub pNext: *const c_void,
+    pub flags: VideoDecodeFlagsKHR,
+    pub codedOffset: Offset2D,
+    pub codedExtent: Extent2D,
+    pub srcBuffer: Buffer,
+    pub srcBufferOffset: DeviceSize,
+    pub srcBufferRange: DeviceSize,
+    pub dstPictureResource: VideoPictureResourceKHR,
+    pub pSetupReferenceSlot: *const VideoReferenceSlotKHR,
+    pub referenceSlotCount: u32,
+    pub pReferenceSlots: *const VideoReferenceSlotKHR,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct VideoSessionCreateInfoKHR {
+    pub sType: StructureType,
+    pub pNext: *const c_void,
+    pub queueFamilyIndex: u32,
+    pub flags: VideoSessionCreateFlagsKHR,
+    pub pVideoProfile: *const VideoProfileKHR,
+    pub pictureFormat: Format,
+    pub maxCodedExtent: Extent2D,
+    pub referencePicturesFormat: Format,
+    pub maxReferencePicturesSlotsCount: u32,
+    pub maxReferencePicturesActiveCount: u32,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct VideoSessionParametersCreateInfoKHR {
+    pub sType: StructureType,
+    pub pNext: *const c_void,
+    pub videoSessionParametersTemplate: VideoSessionParametersKHR,
+    pub videoSession: VideoSessionKHR,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct VideoSessionParametersUpdateInfoKHR {
+    pub sType: StructureType,
+    pub pNext: *const c_void,
+    pub updateSequenceCount: u32,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct VideoBeginCodingInfoKHR {
+    pub sType: StructureType,
+    pub pNext: *const c_void,
+    pub flags: VideoBeginCodingFlagsKHR,
+    pub codecQualityPreset: VideoCodingQualityPresetFlagsKHR,
+    pub videoSession: VideoSessionKHR,
+    pub videoSessionParameters: VideoSessionParametersKHR,
+    pub referenceSlotCount: u32,
+    pub pReferenceSlots: *const VideoReferenceSlotKHR,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct VideoEndCodingInfoKHR {
+    pub sType: StructureType,
+    pub pNext: *const c_void,
+    pub flags: VideoEndCodingFlagsKHR,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct VideoCodingControlInfoKHR {
+    pub sType: StructureType,
+    pub pNext: *const c_void,
+    pub flags: VideoCodingControlFlagsKHR,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct VideoEncodeInfoKHR {
+    pub sType: StructureType,
+    pub pNext: *const c_void,
+    pub flags: VideoEncodeFlagsKHR,
+    pub qualityLevel: u32,
+    pub codedExtent: Extent2D,
+    pub dstBitstreamBuffer: Buffer,
+    pub dstBitstreamBufferOffset: DeviceSize,
+    pub dstBitstreamBufferMaxRange: DeviceSize,
+    pub srcPictureResource: VideoPictureResourceKHR,
+    pub pSetupReferenceSlot: *const VideoReferenceSlotKHR,
+    pub referenceSlotCount: u32,
+    pub pReferenceSlots: *const VideoReferenceSlotKHR,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct VideoEncodeRateControlInfoKHR {
+    pub sType: StructureType,
+    pub pNext: *const c_void,
+    pub flags: VideoEncodeRateControlFlagsKHR,
+    pub rateControlMode: VideoEncodeRateControlModeFlagBitsKHR,
+    pub averageBitrate: u32,
+    pub peakToAverageBitrateRatio: u16,
+    pub frameRateNumerator: u16,
+    pub frameRateDenominator: u16,
+    pub virtualBufferSizeInMs: u32,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct PhysicalDeviceInheritedViewportScissorFeaturesNV {
+    pub sType: StructureType,
+    pub pNext: *mut c_void,
+    pub inheritedViewportScissor2D: Bool32,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct CommandBufferInheritanceViewportScissorInfoNV {
+    pub sType: StructureType,
+    pub pNext: *const c_void,
+    pub viewportScissor2D: Bool32,
+    pub viewportDepthCount: u32,
+    pub pViewportDepths: *const Viewport,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct PhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT {
+    pub sType: StructureType,
+    pub pNext: *mut c_void,
+    pub ycbcr2plane444Formats: Bool32,
+}
+
 // function pointer types
 
 pub type FnInternalAllocationNotification = extern "system" fn(
@@ -9107,6 +9728,19 @@ pub type FnDebugReportMessageEXT = extern "system" fn(
     pLayerPrefix: *const c_char,
     pMessage: *const c_char,
 ) -> ();
+
+pub type FnGetPhysicalDeviceVideoCapabilitiesKHR = extern "system" fn(
+    physicalDevice: PhysicalDevice,
+    pVideoProfile: *const VideoProfileKHR,
+    pCapabilities: *mut VideoCapabilitiesKHR,
+) -> Result;
+
+pub type FnGetPhysicalDeviceVideoFormatPropertiesKHR = extern "system" fn(
+    physicalDevice: PhysicalDevice,
+    pVideoFormatInfo: *const PhysicalDeviceVideoFormatInfoKHR,
+    pVideoFormatPropertyCount: *mut u32,
+    pVideoFormatProperties: *mut VideoFormatPropertiesKHR,
+) -> Result;
 
 pub type FnGetPhysicalDeviceExternalImageFormatPropertiesNV = extern "system" fn(
     physicalDevice: PhysicalDevice,
@@ -10368,6 +11002,77 @@ pub type FnCmdDebugMarkerInsertEXT = extern "system" fn(
     pMarkerInfo: *const DebugMarkerMarkerInfoEXT,
 ) -> ();
 
+pub type FnCreateVideoSessionKHR = extern "system" fn(
+    device: Device,
+    pCreateInfo: *const VideoSessionCreateInfoKHR,
+    pAllocator: *const AllocationCallbacks,
+    pVideoSession: *mut VideoSessionKHR,
+) -> Result;
+
+pub type FnDestroyVideoSessionKHR = extern "system" fn(
+    device: Device,
+    videoSession: VideoSessionKHR,
+    pAllocator: *const AllocationCallbacks,
+) -> ();
+
+pub type FnGetVideoSessionMemoryRequirementsKHR = extern "system" fn(
+    device: Device,
+    videoSession: VideoSessionKHR,
+    pVideoSessionMemoryRequirementsCount: *mut u32,
+    pVideoSessionMemoryRequirements: *mut VideoGetMemoryPropertiesKHR,
+) -> Result;
+
+pub type FnBindVideoSessionMemoryKHR = extern "system" fn(
+    device: Device,
+    videoSession: VideoSessionKHR,
+    videoSessionBindMemoryCount: u32,
+    pVideoSessionBindMemories: *const VideoBindMemoryKHR,
+) -> Result;
+
+pub type FnCreateVideoSessionParametersKHR = extern "system" fn(
+    device: Device,
+    pCreateInfo: *const VideoSessionParametersCreateInfoKHR,
+    pAllocator: *const AllocationCallbacks,
+    pVideoSessionParameters: *mut VideoSessionParametersKHR,
+) -> Result;
+
+pub type FnUpdateVideoSessionParametersKHR = extern "system" fn(
+    device: Device,
+    videoSessionParameters: VideoSessionParametersKHR,
+    pUpdateInfo: *const VideoSessionParametersUpdateInfoKHR,
+) -> Result;
+
+pub type FnDestroyVideoSessionParametersKHR = extern "system" fn(
+    device: Device,
+    videoSessionParameters: VideoSessionParametersKHR,
+    pAllocator: *const AllocationCallbacks,
+) -> ();
+
+pub type FnCmdBeginVideoCodingKHR = extern "system" fn(
+    commandBuffer: CommandBuffer,
+    pBeginInfo: *const VideoBeginCodingInfoKHR,
+) -> ();
+
+pub type FnCmdEndVideoCodingKHR = extern "system" fn(
+    commandBuffer: CommandBuffer,
+    pEndCodingInfo: *const VideoEndCodingInfoKHR,
+) -> ();
+
+pub type FnCmdControlVideoCodingKHR = extern "system" fn(
+    commandBuffer: CommandBuffer,
+    pCodingControlInfo: *const VideoCodingControlInfoKHR,
+) -> ();
+
+pub type FnCmdDecodeVideoKHR = extern "system" fn(
+    commandBuffer: CommandBuffer,
+    pFrameInfo: *const VideoDecodeInfoKHR,
+) -> ();
+
+pub type FnCmdEncodeVideoKHR = extern "system" fn(
+    commandBuffer: CommandBuffer,
+    pEncodeInfo: *const VideoEncodeInfoKHR,
+) -> ();
+
 pub type FnCmdBindTransformFeedbackBuffersEXT = extern "system" fn(
     commandBuffer: CommandBuffer,
     firstBinding: u32,
@@ -11310,6 +12015,58 @@ pub type FnGetPrivateDataEXT = extern "system" fn(
     pData: *mut u64,
 ) -> ();
 
+pub type FnCmdSetEvent2KHR = extern "system" fn(
+    commandBuffer: CommandBuffer,
+    event: Event,
+    pDependencyInfo: *const DependencyInfoKHR,
+) -> ();
+
+pub type FnCmdResetEvent2KHR = extern "system" fn(
+    commandBuffer: CommandBuffer,
+    event: Event,
+    stageMask: PipelineStageFlags2KHR,
+) -> ();
+
+pub type FnCmdWaitEvents2KHR = extern "system" fn(
+    commandBuffer: CommandBuffer,
+    eventCount: u32,
+    pEvents: *const Event,
+    pDependencyInfos: *const DependencyInfoKHR,
+) -> ();
+
+pub type FnCmdPipelineBarrier2KHR = extern "system" fn(
+    commandBuffer: CommandBuffer,
+    pDependencyInfo: *const DependencyInfoKHR,
+) -> ();
+
+pub type FnCmdWriteTimestamp2KHR = extern "system" fn(
+    commandBuffer: CommandBuffer,
+    stage: PipelineStageFlags2KHR,
+    queryPool: QueryPool,
+    query: u32,
+) -> ();
+
+pub type FnQueueSubmit2KHR = extern "system" fn(
+    queue: Queue,
+    submitCount: u32,
+    pSubmits: *const SubmitInfo2KHR,
+    fence: Fence,
+) -> Result;
+
+pub type FnCmdWriteBufferMarker2AMD = extern "system" fn(
+    commandBuffer: CommandBuffer,
+    stage: PipelineStageFlags2KHR,
+    dstBuffer: Buffer,
+    dstOffset: DeviceSize,
+    marker: u32,
+) -> ();
+
+pub type FnGetQueueCheckpointData2NV = extern "system" fn(
+    queue: Queue,
+    pCheckpointDataCount: *mut u32,
+    pCheckpointData: *mut CheckpointData2NV,
+) -> ();
+
 pub type FnCmdSetFragmentShadingRateEnumNV = extern "system" fn(
     commandBuffer: CommandBuffer,
     shadingRate: FragmentShadingRateNV,
@@ -11344,6 +12101,45 @@ pub type FnCmdBlitImage2KHR = extern "system" fn(
 pub type FnCmdResolveImage2KHR = extern "system" fn(
     commandBuffer: CommandBuffer,
     pResolveImageInfo: *const ResolveImageInfo2KHR,
+) -> ();
+
+pub type FnCmdSetVertexInputEXT = extern "system" fn(
+    commandBuffer: CommandBuffer,
+    vertexBindingDescriptionCount: u32,
+    pVertexBindingDescriptions: *const VertexInputBindingDescription2EXT,
+    vertexAttributeDescriptionCount: u32,
+    pVertexAttributeDescriptions: *const VertexInputAttributeDescription2EXT,
+) -> ();
+
+pub type FnCmdSetPatchControlPointsEXT = extern "system" fn(
+    commandBuffer: CommandBuffer,
+    patchControlPoints: u32,
+) -> ();
+
+pub type FnCmdSetRasterizerDiscardEnableEXT = extern "system" fn(
+    commandBuffer: CommandBuffer,
+    rasterizerDiscardEnable: Bool32,
+) -> ();
+
+pub type FnCmdSetDepthBiasEnableEXT = extern "system" fn(
+    commandBuffer: CommandBuffer,
+    depthBiasEnable: Bool32,
+) -> ();
+
+pub type FnCmdSetLogicOpEXT = extern "system" fn(
+    commandBuffer: CommandBuffer,
+    logicOp: LogicOp,
+) -> ();
+
+pub type FnCmdSetPrimitiveRestartEnableEXT = extern "system" fn(
+    commandBuffer: CommandBuffer,
+    primitiveRestartEnable: Bool32,
+) -> ();
+
+pub type FnCmdSetColorWriteEnableEXT = extern "system" fn(
+    commandBuffer: CommandBuffer,
+    attachmentCount: u32,
+    pColorWriteEnables: *const Bool32,
 ) -> ();
 
 // command struct macros
@@ -11627,6 +12423,17 @@ ptrs!(InstanceCommands, (GetInstanceProcAddr: FnGetInstanceProcAddr, instance: I
         pLayerPrefix: *const c_char,
         pMessage: *const c_char,
     ) -> (),
+    GetPhysicalDeviceVideoCapabilitiesKHR => (
+        physicalDevice: PhysicalDevice,
+        pVideoProfile: *const VideoProfileKHR,
+        pCapabilities: *mut VideoCapabilitiesKHR,
+    ) -> Result,
+    GetPhysicalDeviceVideoFormatPropertiesKHR => (
+        physicalDevice: PhysicalDevice,
+        pVideoFormatInfo: *const PhysicalDeviceVideoFormatInfoKHR,
+        pVideoFormatPropertyCount: *mut u32,
+        pVideoFormatProperties: *mut VideoFormatPropertiesKHR,
+    ) -> Result,
     GetPhysicalDeviceExternalImageFormatPropertiesNV => (
         physicalDevice: PhysicalDevice,
         format: Format,
@@ -12736,6 +13543,65 @@ ptrs!(DeviceCommands, (GetDeviceProcAddr: FnGetDeviceProcAddr, device: Device), 
         commandBuffer: CommandBuffer,
         pMarkerInfo: *const DebugMarkerMarkerInfoEXT,
     ) -> (),
+    CreateVideoSessionKHR => (
+        device: Device,
+        pCreateInfo: *const VideoSessionCreateInfoKHR,
+        pAllocator: *const AllocationCallbacks,
+        pVideoSession: *mut VideoSessionKHR,
+    ) -> Result,
+    DestroyVideoSessionKHR => (
+        device: Device,
+        videoSession: VideoSessionKHR,
+        pAllocator: *const AllocationCallbacks,
+    ) -> (),
+    GetVideoSessionMemoryRequirementsKHR => (
+        device: Device,
+        videoSession: VideoSessionKHR,
+        pVideoSessionMemoryRequirementsCount: *mut u32,
+        pVideoSessionMemoryRequirements: *mut VideoGetMemoryPropertiesKHR,
+    ) -> Result,
+    BindVideoSessionMemoryKHR => (
+        device: Device,
+        videoSession: VideoSessionKHR,
+        videoSessionBindMemoryCount: u32,
+        pVideoSessionBindMemories: *const VideoBindMemoryKHR,
+    ) -> Result,
+    CreateVideoSessionParametersKHR => (
+        device: Device,
+        pCreateInfo: *const VideoSessionParametersCreateInfoKHR,
+        pAllocator: *const AllocationCallbacks,
+        pVideoSessionParameters: *mut VideoSessionParametersKHR,
+    ) -> Result,
+    UpdateVideoSessionParametersKHR => (
+        device: Device,
+        videoSessionParameters: VideoSessionParametersKHR,
+        pUpdateInfo: *const VideoSessionParametersUpdateInfoKHR,
+    ) -> Result,
+    DestroyVideoSessionParametersKHR => (
+        device: Device,
+        videoSessionParameters: VideoSessionParametersKHR,
+        pAllocator: *const AllocationCallbacks,
+    ) -> (),
+    CmdBeginVideoCodingKHR => (
+        commandBuffer: CommandBuffer,
+        pBeginInfo: *const VideoBeginCodingInfoKHR,
+    ) -> (),
+    CmdEndVideoCodingKHR => (
+        commandBuffer: CommandBuffer,
+        pEndCodingInfo: *const VideoEndCodingInfoKHR,
+    ) -> (),
+    CmdControlVideoCodingKHR => (
+        commandBuffer: CommandBuffer,
+        pCodingControlInfo: *const VideoCodingControlInfoKHR,
+    ) -> (),
+    CmdDecodeVideoKHR => (
+        commandBuffer: CommandBuffer,
+        pFrameInfo: *const VideoDecodeInfoKHR,
+    ) -> (),
+    CmdEncodeVideoKHR => (
+        commandBuffer: CommandBuffer,
+        pEncodeInfo: *const VideoEncodeInfoKHR,
+    ) -> (),
     CmdBindTransformFeedbackBuffersEXT => (
         commandBuffer: CommandBuffer,
         firstBinding: u32,
@@ -13665,6 +14531,50 @@ ptrs!(DeviceCommands, (GetDeviceProcAddr: FnGetDeviceProcAddr, device: Device), 
         privateDataSlot: PrivateDataSlotEXT,
         pData: *mut u64,
     ) -> (),
+    CmdSetEvent2KHR => (
+        commandBuffer: CommandBuffer,
+        event: Event,
+        pDependencyInfo: *const DependencyInfoKHR,
+    ) -> (),
+    CmdResetEvent2KHR => (
+        commandBuffer: CommandBuffer,
+        event: Event,
+        stageMask: PipelineStageFlags2KHR,
+    ) -> (),
+    CmdWaitEvents2KHR => (
+        commandBuffer: CommandBuffer,
+        eventCount: u32,
+        pEvents: *const Event,
+        pDependencyInfos: *const DependencyInfoKHR,
+    ) -> (),
+    CmdPipelineBarrier2KHR => (
+        commandBuffer: CommandBuffer,
+        pDependencyInfo: *const DependencyInfoKHR,
+    ) -> (),
+    CmdWriteTimestamp2KHR => (
+        commandBuffer: CommandBuffer,
+        stage: PipelineStageFlags2KHR,
+        queryPool: QueryPool,
+        query: u32,
+    ) -> (),
+    QueueSubmit2KHR => (
+        queue: Queue,
+        submitCount: u32,
+        pSubmits: *const SubmitInfo2KHR,
+        fence: Fence,
+    ) -> Result,
+    CmdWriteBufferMarker2AMD => (
+        commandBuffer: CommandBuffer,
+        stage: PipelineStageFlags2KHR,
+        dstBuffer: Buffer,
+        dstOffset: DeviceSize,
+        marker: u32,
+    ) -> (),
+    GetQueueCheckpointData2NV => (
+        queue: Queue,
+        pCheckpointDataCount: *mut u32,
+        pCheckpointData: *mut CheckpointData2NV,
+    ) -> (),
     CmdSetFragmentShadingRateEnumNV => (
         commandBuffer: CommandBuffer,
         shadingRate: FragmentShadingRateNV,
@@ -13693,6 +14603,38 @@ ptrs!(DeviceCommands, (GetDeviceProcAddr: FnGetDeviceProcAddr, device: Device), 
     CmdResolveImage2KHR => (
         commandBuffer: CommandBuffer,
         pResolveImageInfo: *const ResolveImageInfo2KHR,
+    ) -> (),
+    CmdSetVertexInputEXT => (
+        commandBuffer: CommandBuffer,
+        vertexBindingDescriptionCount: u32,
+        pVertexBindingDescriptions: *const VertexInputBindingDescription2EXT,
+        vertexAttributeDescriptionCount: u32,
+        pVertexAttributeDescriptions: *const VertexInputAttributeDescription2EXT,
+    ) -> (),
+    CmdSetPatchControlPointsEXT => (
+        commandBuffer: CommandBuffer,
+        patchControlPoints: u32,
+    ) -> (),
+    CmdSetRasterizerDiscardEnableEXT => (
+        commandBuffer: CommandBuffer,
+        rasterizerDiscardEnable: Bool32,
+    ) -> (),
+    CmdSetDepthBiasEnableEXT => (
+        commandBuffer: CommandBuffer,
+        depthBiasEnable: Bool32,
+    ) -> (),
+    CmdSetLogicOpEXT => (
+        commandBuffer: CommandBuffer,
+        logicOp: LogicOp,
+    ) -> (),
+    CmdSetPrimitiveRestartEnableEXT => (
+        commandBuffer: CommandBuffer,
+        primitiveRestartEnable: Bool32,
+    ) -> (),
+    CmdSetColorWriteEnableEXT => (
+        commandBuffer: CommandBuffer,
+        attachmentCount: u32,
+        pColorWriteEnables: *const Bool32,
     ) -> (),
 });
 
