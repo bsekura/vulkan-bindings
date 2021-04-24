@@ -86,7 +86,8 @@ impl Clone for VkLayerProperties {
 
 impl Vulkan {
     pub fn new() -> Result<Self, libloading::Error> {
-        libloading::Library::new(VULKAN_LIB).map(|lib| {
+        let maybe_lib = unsafe { libloading::Library::new(VULKAN_LIB) };
+        maybe_lib.map(|lib| {
             let GetInstanceProcAddr: vk::FnGetInstanceProcAddr = unsafe {
                 let s = lib
                     .get::<vk::FnVoidFunction>(b"vkGetInstanceProcAddr\0")
