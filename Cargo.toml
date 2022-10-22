@@ -1,6 +1,6 @@
 [package]
 name = "vulkan-bindings"
-version = "1.3.225"
+version = "1.3.231"
 authors = ["Bart Sekura <bart.sekura@gmail.com>"]
 repository = "https://github.com/bsekura/vulkan-bindings"
 description = "Bindings for the Vulkan API generated from Khronos spec (vk.xml)"
